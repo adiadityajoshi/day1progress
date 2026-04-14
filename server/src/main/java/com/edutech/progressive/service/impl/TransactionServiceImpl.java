@@ -1,35 +1,47 @@
 package com.edutech.progressive.service.impl;
 
+import com.edutech.progressive.dao.TransactionDAO;
+import com.edutech.progressive.entity.Transactions;
+import com.edutech.progressive.service.TransactionService;
+
 import java.sql.SQLException;
 import java.util.List;
 
-import com.edutech.progressive.entity.Transactions;
+public class TransactionServiceImpl implements TransactionService {
 
-public class TransactionServiceImpl {
+    private final TransactionDAO transactionDAO;
 
-    public List<Transactions> getAlITransactions() throws SQLException {
-        return null;
+    public TransactionServiceImpl(TransactionDAO transactionDAO) {
+        this.transactionDAO = transactionDAO;
     }
 
-    public Transactions getTransactionByld(int transactionld) throws SQLException {
-        return null;
+    @Override
+    public List<Transactions> getAllTransactions() throws SQLException {
+        return transactionDAO.getAllTransactions();
     }
 
+    @Override
+    public Transactions getTransactionById(int transactionId) throws SQLException {
+        return transactionDAO.getTransactionById(transactionId);
+    }
+
+    @Override
     public int addTransaction(Transactions transaction) throws SQLException {
-        return -1;
+        return transactionDAO.addTransaction(transaction);
     }
 
+    @Override
     public void updateTransaction(Transactions transaction) throws SQLException {
-
+        transactionDAO.updateTransaction(transaction);
     }
 
-    public void deleteTransaction(int transactionld) throws SQLException {
-
+    @Override
+    public void deleteTransaction(int transactionId) throws SQLException {
+        transactionDAO.deleteTransaction(transactionId);
     }
 
-    public List<Transactions> getTransactionsByCustomerld(int customerld) throws SQLException {
-        return null;
-
+    @Override
+    public List<Transactions> getTransactionsByCustomerId(int customerId) throws SQLException {
+        return transactionDAO.getTransactionsByCustomerId(customerId);
     }
-
 }

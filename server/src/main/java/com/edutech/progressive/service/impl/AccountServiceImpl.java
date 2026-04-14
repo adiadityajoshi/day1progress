@@ -1,50 +1,55 @@
 package com.edutech.progressive.service.impl;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.edutech.progressive.dao.AccountDAO;
 import com.edutech.progressive.entity.Accounts;
+import com.edutech.progressive.service.AccountService;
 
-public class AccountServiceImpl {
-    private AccountDAO accountDAO;
+import java.sql.SQLException;
+import java.util.Comparator;
+import java.util.List;
+
+public class AccountServiceImpl implements AccountService {
+
+    private final AccountDAO accountDAO;
 
     public AccountServiceImpl(AccountDAO accountDAO) {
         this.accountDAO = accountDAO;
     }
 
+    @Override
     public List<Accounts> getAllAccounts() throws SQLException {
-        return null;
-
+        return accountDAO.getAllAccounts();
     }
 
-    public Accounts getAccountByld(int accountld) throws SQLException {
-        return null;
-
+    @Override
+    public Accounts getAccountById(int accountId) throws SQLException {
+        return accountDAO.getAccountById(accountId);
     }
 
+    @Override
     public int addAccount(Accounts accounts) throws SQLException {
-        return -1;
-
+        return accountDAO.addAccount(accounts);
     }
 
+    @Override
     public void updateAccount(Accounts accounts) throws SQLException {
-
+        accountDAO.updateAccount(accounts);
     }
 
-    public void deleteAccount(int accountld) throws SQLException {
-
+    @Override
+    public void deleteAccount(int accountId) throws SQLException {
+        accountDAO.deleteAccount(accountId);
     }
 
+    @Override
     public List<Accounts> getAllAccountsSortedByBalance() throws SQLException {
-        return null;
-
+        List<Accounts> list = accountDAO.getAllAccounts();
+        list.sort(Comparator.comparingDouble(Accounts::getBalance));
+        return list;
     }
 
-    public List<Accounts> getAccountsByUser(int userld) throws SQLException {
-        return null;
-
+    @Override
+    public List<Accounts> getAccountsByUser(int userId) throws SQLException {
+        return accountDAO.getAllAccountsByCustomer(userId);
     }
-
 }
